@@ -21,7 +21,7 @@ test-8.0:  ## Test php8.0 build only
 
 _test-version: _test-prerequisites ## Test php build for VERSION="" and VARIANT=""
 	docker buildx bake --load \
-		--platform=${PLATFORM:$(uname -p)}} \
+	    --set "*.platform=$$(uname -p)"
 		php${VERSION//.}-cli
 	PHP_VERSION="$(VERSION)" BRANCH=v4 VARIANT=cli ./test-image.sh || (notify-send -u critical "Tests failed ($(VERSION)-$(VARIANT))" && exit 1)
 	notify-send -u critical "Tests passed with success ($(VERSION)-$(VARIANT))"

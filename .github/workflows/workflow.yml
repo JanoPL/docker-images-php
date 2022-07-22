@@ -28,7 +28,7 @@ jobs:
         run: |
           PHP_VERSION="${{ matrix.php_version }}"
           docker buildx bake --load \
-            --platform=${PLATFORM:$(uname -p)}} \
+            --set "*.platform=${PLATFORM:$(uname -p)}" \
             php${PHP_VERSION//.}-${{ matrix.variant }} 
           docker images --filter=reference=thecodingmachine/php
       - name: Login to DockerHub
